@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bch-enzymeml
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bch-enzymeml
+  template: 
+    metadata:
+      labels:
+        app: bch-enzymeml
+    spec:
+      containers:
+      - name: bch-enzymeml
+        image: stephan211087/bch_enzymeml:v0.1
+        ports:
+        - containerPort: 5000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: bch-enzymeml-service
+spec:
+  selector:
+    app: bch-enzymeml
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000

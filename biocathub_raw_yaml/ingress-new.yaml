@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: retrobiohub-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    kubernetes.io/ingress.class: nginx
+spec:
+
+  tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
+  - hosts:
+    - retrobiohub.org
+    secretName: myingress-cert # < name of the secret in which the keys will be stored
+  defaultBackend:
+    service:
+      name: biocathub-angular-app-service
+      port:
+        number: 80
+  rules:
+  - host: retrobiohub.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: biocathub-angular-app-service
+            port:
+              number: 80
+      - path: /retrobiohub
+        pathType: Prefix
+        backend:
+          service:
+            name: bch-retrobiohub-service 
+            port:
+              number: 5000
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: bch-enzymeml-service
+            port:
+              number: 5000
+
