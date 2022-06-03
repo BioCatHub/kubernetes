@@ -4,6 +4,21 @@
 
 replicaCount: 1
 
+frontend:
+  Name: biocathub-angular-app
+  ServiceName: biocathub-angular-app-service
+
+
+retrobiohub:
+  Name: bch-retrobiohub
+  ServiceName: bch-retrobiohub-service
+
+bch-db-query:
+  Name: bch-retrobiohub
+  ServiceName: bch-retrobiohub-service
+
+
+
 image:
   repository: nginx
   pullPolicy: IfNotPresent
