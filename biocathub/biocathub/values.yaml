@@ -17,6 +17,10 @@ bch-db-query:
   Name: bch-retrobiohub
   ServiceName: bch-retrobiohub-service
 
+bch-enzml:
+  Name: bch-enzymeml
+  ServiceName: bch-enzymeml-service
+
 
 
 image:
