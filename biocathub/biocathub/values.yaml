@@ -13,9 +13,10 @@ retrobiohub:
   Name: bch-retrobiohub
   ServiceName: bch-retrobiohub-service
 
-bch-db-query:
+bchDbQuery:
   Name: bch-retrobiohub
-  ServiceName: bch-retrobiohub-service
+  ServiceName: bch-bchDbQuery-service
+  ContainerName: biocathubbackenddatabasequery
 
 bch-enzml:
   Name: bch-enzymeml
