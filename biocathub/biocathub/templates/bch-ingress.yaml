@@ -1,0 +1,54 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingressSpecs.Name }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.ingressSpecs.CertManager }}
+    kubernetes.io/ingress.class: nginx
+spec:
+
+  #tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
+  #- hosts:
+    #- {{ .Values.ingressSpecs.Host }}
+    #secretName: {{ .Values.ingress.TLSSecretName }} # < name of the secret in which the keys will be stored
+  defaultBackend:
+    service:
+      name: {{ .Values.frontend.ServiceName }}
+      port:
+        number: 80
+  rules:
+  - host: {{ .Values.ingressSpecs.Host }}
+    http:
+      paths:
+      # Path definition Frontend
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.frontend.ServiceName }}
+            port:
+              number: 80
+      # Path definition Retrobiohub
+      - path: {{ .Values.retrobiohub.Path }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.retrobiohub.ServiceName }}
+            port:
+              number: 5000
+      # Path definition bch-dbQuery
+      - path: {{ .Values.bchDbQuery.Path }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.bchDbQuery.ServiceName }}
+            port:
+              number: 5000
+      # Path definition bch-enzml
+      - path: {{ .Values.bchEnzml.Path }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.bchEnzml.ServiceName }}
+            port:
+              number: 5000

@@ -4,23 +4,33 @@
 
 replicaCount: 1
 
+
+ingressSpecs:
+  Name: retrobiohub-ingress
+  CertManager: letsencrypt-staging
+  ServiceName: biocathub-angular-app-service
+  Host: stephanstinkermadness.org
+  TLSSecretName: letsencrypt-staging
+
 frontend:
   Name: biocathub-angular-app
   ServiceName: biocathub-angular-app-service
 
+bchDbQuery:
+  Name: bch-db-query
+  ServiceName: bch-bchdbquery-service
+  ContainerName: biocathubbackenddatabasequery
+  Path: /api
 
 retrobiohub:
   Name: bch-retrobiohub
   ServiceName: bch-retrobiohub-service
+  Path: /retrobiohub
 
-bchDbQuery:
-  Name: bch-retrobiohub
-  ServiceName: bch-bchDbQuery-service
-  ContainerName: biocathubbackenddatabasequery
-
-bch-enzml:
+bchEnzml:
   Name: bch-enzymeml
   ServiceName: bch-enzymeml-service
+  Path: /api
 
 
 

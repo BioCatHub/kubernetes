@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: {{ .Values.bchDbQuery.ContainerName }}
-        image: {{ .Values.bchDbQuery.ContainerName }}
+        image: stephan211087/{{ .Values.bchDbQuery.ContainerName }}
         ports:
         - containerPort: 5000
 
