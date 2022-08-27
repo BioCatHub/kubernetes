@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.bchDbQuery.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.bchDbQuery.Name }}
+  template: 
+    metadata:
+      labels:
+        app: {{ .Values.bchDbQuery.Name }}
+    spec:
+      containers:
+      - name: bch-enzymeml
+        image: stephan211087/{{ .Values.bchDbQuery.ContainerName }}
+        ports:
+        - containerPort: 5000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.bchDbQuery.ServiceName }}
+spec:
+  selector:
+    app: {{ .Values.bchDbQuery.Name }}
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000

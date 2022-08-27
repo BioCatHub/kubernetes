@@ -20,6 +20,7 @@ bchDbQuery:
   Name: bch-db-query
   ServiceName: bch-bchdbquery-service
   ContainerName: biocathubbackenddatabasequery
+  #ContainerName: bch-db-query-biocat:v0.1
   Path: /api
 
 retrobiohub:
@@ -30,8 +31,14 @@ retrobiohub:
 bchEnzml:
   Name: bch-enzymeml
   ServiceName: bch-enzymeml-service
-  Path: /api
+  ContainerName: bch_enzymeml:errorv3
+  Path: /api/enzymeml
 
+bchSmilesToStructures:
+  Name: bch-smiles-to-structures
+  ServiceName: bch-smiles-to-structures-service
+  ContainerName: bch-smiles-to-structures:v0.3
+  Path: /smiles
 
 
 image:

@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: {{ .Values.frontend.Name }}
-        image: stephan211087/retrobiohub-frontend:v0.2
+        image: stephan211087/biocat-example:verror8
+        #image: stephan211087/frontend-retrobiohub:v1
         ports:
         - containerPort: 80
 
@@ -26,7 +27,7 @@ metadata:
   name: {{ .Values.frontend.ServiceName }}
 spec:
   selector:
-    app: {{ .Values.frontend.ServiceName }}
+    app: {{ .Values.frontend.Name }}
   ports:
   - protocol: TCP
     port: 80
